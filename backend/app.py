@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 import json
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 with open("companies.json") as f:
     companies = json.load(f)
