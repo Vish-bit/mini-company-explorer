@@ -1,11 +1,16 @@
 import React from "react";
 import SearchPage from "./components/SearchPage";
+import {Routes, Route} from "react-router-dom";
+import DetailPage from "./components/DetailPage";
 
 const App = () => {
 
   return (
-    <div>
-      <SearchPage />
+    <div className="montserrat-regular">
+        <Routes>
+          <Route path="/" element={<SearchPage />}/>
+          <Route path="/detail" element={<DetailPage />}/>
+        </Routes>
     </div>
   );
 };
