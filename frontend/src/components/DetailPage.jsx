@@ -1,5 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Team from "../assets/team.png";
+import Map from "../assets/white-map.png";
+import Industry from "../assets/industry.svg";
 
 function DetailPage() {
   const { id } = useParams();
@@ -41,16 +44,16 @@ function DetailPage() {
             {company.name}
           </p>
           <div className="space-y-2 text-gray-300">
-            <p className="text-xl border-t border-gray-500 py-4">
-              <span className=" text-gray-200 ">Location : </span>
+            <p className="text-xl border-t border-gray-700 py-4 flex gap-8 items-center">
+              <img src={Map} alt="Location" width={30}/>
               {company.location || "N/A"}
             </p>
-            <p className="text-xl border-t border-gray-500 py-4">
-              <span className=" text-gray-200 ">Industry : </span>
+            <p className="text-xl border-t border-gray-700 py-4 flex gap-8 items-center">
+              <img src={Industry} alt="Industry" width={32}/>
               {company.industry}
             </p>
-            <p className="text-xl border-t border-gray-500 py-4">
-              <span className=" text-gray-200 ">Employees : </span>
+            <p className="text-xl border-t border-gray-700 py-4 flex gap-8 items-center">
+                <img src={Team} alt="Employees" width={34}/>
               {company.employees || "N/A"}
             </p>
           </div>
