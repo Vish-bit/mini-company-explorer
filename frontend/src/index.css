@@ -1,6 +1,6 @@
 @import "tailwindcss";
 .montserrat-regular{font-family:Montserrat,sans-serif;font-optical-sizing:auto;font-weight:400;font-style:normal}
-body{font-family:"Bebas Neue",sans-serif;font-weight:400;font-style:normal;margin:0;min-width:320px;min-height:100vh;background:#000000;color:#ffffff}
+body{font-family:"Bebas Neue",sans-serif;font-weight:400;font-style:normal;margin:0;min-width:320px;min-height:100vh;background:#000;color:#fff}
 h1{font-size:3.2em;line-height:1.1}
 button{border-radius:8px;border:1px solid transparent;padding:.5em 1.2em;font-size:1rem;font-weight:500;font-family:inherit;cursor:pointer;text-align:center;text-transform:uppercase}
 button:focus,button:focus-visible{outline:0 auto -webkit-focus-ring-color}
@@ -8,4 +8,7 @@ button:focus,button:focus-visible{outline:0 auto -webkit-focus-ring-color}
 .btn-view{background-image:linear-gradient(to right,#77a1d3 0,#79cbca 51%,#77a1d3 100%)}
 .btn-grad{transition:.5s;background-size:200% auto;color:#fff;box-shadow:0 0 20px #eee;display:block}
 .btn-grad:hover{background-position:right center;color:#fff;text-decoration:none}
-.search-input:hover, .search-input:focus-visible{transition:.5s;color:#fff;box-shadow:0 0 12px #eee}
+.neon-input{box-shadow:0 0 6px rgba(172,0,189,.35);transition:box-shadow .3s ease,border-color .3s ease}
+.neon-input:focus{box-shadow:0 0 12px rgba(172,0,189,.6),0 0 24px rgba(172,0,189,.45),0 0 48px rgba(172,0,189,.35)}
+.view-icon{visibility: hidden;}
+li:hover .view-icon{visibility: visible;}
