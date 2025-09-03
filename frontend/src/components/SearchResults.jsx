@@ -1,59 +1,34 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import CompanyIcon from "../assets/company-placeholder.svg";
 
 const SearchResults = ({ loading, result, query, searched }) => {
   const navigate = useNavigate();
-  
+
+  if (loading) return <p className="text-gray-400 text-center">Loading...</p>;
+
+  if (!loading && query && result.length === 0) {
+    return (
+      <p className="text-gray-400 text-center">
+        No results found for <span className="font-semibold">"{query}"</span>
+      </p>
+    );
+  }
+
   return (
     <>
-      {loading && (
-        <p className="text-gray-00 text-center mt-10 animate-plus">
-          Loading...
-        </p>
-      )}
-
-      {!loading && result.length === 0 && query === "" && (
-        <p className="text-gray-00 text-center mt-10">
-          <em>"Start by searching for a company above"</em>
-        </p>
-      )}
-
-      {!loading && searched && result.length === 0 && (
-        <p className="text-gray-00 text-center mt-10">
-          No results found for <span className="font-semibold">"{query}"</span>
-        </p>
-      )}
-
-      {!loading && searched && result.length > 0 && (
-        <ul className="space-y-3">
-          {result.map((company) => (
-            <li
-              key={company.id}
-              className="p-4 border border-0 rounded-md shadow-sm hover:shadow-md transition cursor-pointer bg-white"
-            >
-              <div className="flex justify-between align-center">
-                <div className="flex items-center gap-4">
-                  <img
-                    src="src/assets/company-placeholder.png"
-                    alt=""
-                    width="42"
-                  />
-                  <div className="flex flex-col items-start justify-centr">
-                    <p className="font-semibold text-md text-gray-800">
-                      {company.name}
-                    </p>
-                    <p className="text-sm text-md text-gray-600">
-                      {company.industry}
-                    </p>
-                  </div>
-                </div>
-                <button type="button" className="text-md text-blue-600 bg-white" onClick={navigate("/detail")}>View</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul className="space-y-2">
+        {result.map((company) => (
+          <li
+            key={company.id}
+            onClick={() => navigate(`/company/${company.id}`)}
+            className="p-3 flex justify-between items-center border border-gray-700 
+                     rounded-lg cursor-pointer hover:bg-gray-800 transition"
+          >
+            <p className="font-medium text-gray-200">{company.name}</p>
+            <p className="text-sm text-gray-400">{company.industry}</p>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };

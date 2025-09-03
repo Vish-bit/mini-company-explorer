@@ -4,12 +4,11 @@ import {Routes, Route} from "react-router-dom";
 import DetailPage from "./components/DetailPage";
 
 const App = () => {
-
   return (
     <div className="montserrat-regular">
         <Routes>
           <Route path="/" element={<SearchPage />}/>
-          <Route path="/detail" element={<DetailPage />}/>
+          <Route path="/company/:id" element={<DetailPage />}/>
         </Routes>
     </div>
   );
