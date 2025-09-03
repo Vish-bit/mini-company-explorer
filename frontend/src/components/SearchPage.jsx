@@ -1,64 +1,57 @@
-import React, { useEffect, useState } from "react";
-import Search from "../assets/search.png";
+import React, { useState, useEffect } from "react";
+import Search from "../assets/search-icon.png";
 import SearchResults from "./SearchResults";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setResults] = useState([]);
-  const [searched, setSearched] = useState(false);
+  const [result, setResult] = useState([]);
+  // const [searched, setSearched] = useState(false);
 
-  const handleSearch = async () => {
-    console.log("search")
-    if (!query.trim()) return;
-    setLoading(true);
-    setSearched(true);
-
-    try {
-      const res = await fetch(`http://127.0.0.1:5000/api/companies?q=${query}`);
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      const data = await res.json();
-      setResults(data);
-    } catch (err) {
-      console.log("Error fetching companies", err);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    if (!query.trim()) {
+      setResult([]);
+      return;
     }
-  };
+
+    const delayDebounce = setTimeout(async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `http://127.0.0.1:5000/api/companies?q=${query}`
+        );
+        if (!res.ok) throw new Error("Error fetching results");
+        const data = await res.json();
+        setResult(data);
+      } catch (err) {
+        console.error(err);
+        setResult([]);
+      } finally {
+        setLoading(false);
+      }
+    }, 400); // debounce search (400ms delay)
+
+    return () => clearTimeout(delayDebounce);
+  }, [query]);
 
   return (
-    <div className="max-w-xl mx-auto">
-      <div className="flex gap-2 mb-4 pt-6 ">
-        <div className="w-full relative">
-          <img
-            src={Search}
-            alt="Search"
-            className="absolute w-7 top-3 left-3"
-          />
-          <input
-            type="text"
-            placeholder="Search companies..."
-            className="flex-1 w-full px-12 py-3 bg-white border-2 border-gray-300 focus:outline-none rounded-lg focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-            value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              if (e.target.value === "") setSearched(false);
-            }}
-          />
-        </div>
-        <button type="button" onClick={handleSearch} className="btn-grad">
-          Search
-        </button>
+    <div className="max-w-2xl mx-auto mt-10 text-gray-200">
+      <div className="relative mb-6">
+        <span className="absolute inset-y-0 left-0 flex items-center pl-3 bg-gray-600">
+          <img src={Search} alt="Search" width={32}/>
+        </span>
+        <input
+          type="text"
+          value={query}
+          placeholder="Search companies..."
+          onChange={(e) => setQuery(e.target.value)}
+          className="w-full px-12 py-3 rounded-lg border-2 border-gray-700 
+                     bg-gray-900 text-gray-100 placeholder-gray-500
+                     focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-lg search-input"
+        />
       </div>
 
-      <SearchResults
-        loading={loading}
-        result={result}
-        query={query}
-        searched={searched}
-      />
+      <SearchResults loading={loading} result={result} query={query} />
     </div>
   );
 };
