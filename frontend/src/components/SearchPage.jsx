@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Search from "../assets/search-icon.png";
+import Search from "../assets/search.png";
 import SearchResults from "./SearchResults";
 
 const SearchPage = () => {
@@ -37,17 +37,19 @@ const SearchPage = () => {
   return (
     <div className="max-w-2xl mx-auto mt-10 text-gray-200">
       <div className="relative mb-6">
-        <span className="absolute inset-y-0 left-0 flex items-center pl-3 bg-gray-600">
-          <img src={Search} alt="Search" width={32}/>
+        <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+          <img src={Search} alt="Search" width={28}/>
         </span>
         <input
           type="text"
           value={query}
           placeholder="Search companies..."
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full px-12 py-3 rounded-lg border-2 border-gray-700 
-                     bg-gray-900 text-gray-100 placeholder-gray-500
-                     focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-lg search-input"
+          className="neon-input
+              w-full px-12 py-3 rounded-lg text-lg
+              bg-transparent text-gray-100 placeholder-gray-400
+              border-2 border-[#9700bd]/70 focus:border-[#dc50ff]
+              focus:ring-4 focus:ring-[#9700bd]/45 outline-none"
         />
       </div>
 

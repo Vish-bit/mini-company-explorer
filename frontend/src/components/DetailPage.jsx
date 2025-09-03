@@ -1,8 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import BackIcon from "../assets/back.png";
-import CompanyDetailIcon from "../assets/company-detail-icon.svg";
-import MapIcon from "../assets/map.png";
 
 function DetailPage() {
   const { id } = useParams();
@@ -34,12 +31,30 @@ function DetailPage() {
     return <p className="text-gray-00 text-center mt-10">No company found</p>;
 
   return (
-    <div className="max-w-lg mx-auto mt-10 bg-gray-900 p-6 rounded-lg shadow border border-gray-700 text-gray-200">
-      <h2 className="text-xl font-bold mb-4 text-purple-400">{company.name}</h2>
-      <div className="space-y-2 text-gray-300">
-        <p><span className="font-semibold text-gray-400">Location:</span> {company.location || "N/A"}</p>
-        <p><span className="font-semibold text-gray-400">Industry:</span> {company.industry}</p>
-        <p><span className="font-semibold text-gray-400">Employees:</span> {company.employees || "N/A"}</p>
+    <div className="h-screen p-4">
+      <Link to="/">
+        <p className="text-gray-400 hover:text-gray-200">{"< "}Back</p>
+      </Link>
+      <div className="flex items-center justify-center bg-[oklch(0.15 0.05 247.52)]">
+        <div className="w-lg mx-auto mt-10 p-6 rounded-lg shadow-lg shadow-[#581f6761] border border-gray-700 text-gray-200">
+          <p className="text-3xl font-bold mb-4 text-gray-200 py-4">
+            {company.name}
+          </p>
+          <div className="space-y-2 text-gray-300">
+            <p className="text-xl border-t border-gray-500 py-4">
+              <span className=" text-gray-200 ">Location : </span>
+              {company.location || "N/A"}
+            </p>
+            <p className="text-xl border-t border-gray-500 py-4">
+              <span className=" text-gray-200 ">Industry : </span>
+              {company.industry}
+            </p>
+            <p className="text-xl border-t border-gray-500 py-4">
+              <span className=" text-gray-200 ">Employees : </span>
+              {company.employees || "N/A"}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

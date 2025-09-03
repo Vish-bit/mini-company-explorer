@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import CompanyIcon from "../assets/company-placeholder.svg";
+import View from "../assets/view.png";
 
 const SearchResults = ({ loading, result, query, searched }) => {
   const navigate = useNavigate();
@@ -21,11 +21,16 @@ const SearchResults = ({ loading, result, query, searched }) => {
           <li
             key={company.id}
             onClick={() => navigate(`/company/${company.id}`)}
-            className="p-3 flex justify-between items-center border border-gray-700 
-                     rounded-lg cursor-pointer hover:bg-gray-800 transition"
+            className="p-3 flex justify-between items-center border-1 border-gray-700 
+                     rounded-lg cursor-pointer text-gray-400 hover:bg-[#da89ff1f] hover:border-gray-400 hover:text-white transition"
           >
-            <p className="font-medium text-gray-200">{company.name}</p>
-            <p className="text-sm text-gray-400">{company.industry}</p>
+            <div className="w-full flex items-center justify-between">
+              <div className="flex flex-col">
+                <p className="text-lg">{company.name}</p>
+                <p className="text-sm">{company.industry}</p>
+              </div>
+              <img src={View} alt="View" className="text-white view-icon"/>
+            </div>
           </li>
         ))}
       </ul>
